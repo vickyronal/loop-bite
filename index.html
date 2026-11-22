@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loop Bite — Endings that taste like beginnings</title>
+  <meta name="description" content="Loop Bite is a small-batch home bakery in Sholinganallur, Chennai. Brownies, cookies, cupcakes, cakes and gift hampers, baked to order." />
+  <meta name="theme-color" content="#4E2A1E" />
+  <link rel="icon" href="/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=DM+Sans:opsz,wght@9..40,400..700&family=Caveat:wght@500..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+</head>
+<body class="is-loading">
+
+  <!-- Reusable logo icon: gold dot + ∞ frosting + cupcake base -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <path id="inf-path" d="M60,36 C67,26 88,24 88,36 C88,48 67,46 60,36 C53,26 32,24 32,36 C32,48 53,46 60,36 Z" />
+      <path id="cup-path" d="M24,56 H96 Q103,56 101.5,63 L94,98 Q92.5,104 86,104 H34 Q27.5,104 26,98 L18.5,63 Q17,56 24,56 Z" />
+    </defs>
+  </svg>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+  <!-- 00 · Preloader -->
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__curtain"></div>
+    <div class="preloader__logo" role="img" aria-label="Loop Bite">
+      <!-- the real logo artwork, laid out exactly as the original; each word rises through its own mask -->
+      <div class="pl-stage">
+        <div class="pl-clip pl-clip--loop"><img class="pl-in" src="/logo-mark.png" alt="" /></div>
+        <div class="pl-clip pl-clip--bite"><img class="pl-in" src="/logo-mark.png" alt="" /></div>
+        <svg class="pl-icon" viewBox="0 0 854 714" aria-hidden="true">
+          <path class="pl-inf" d="M634.5,395.5 C646,377 684,376 684,395.5 C684,415 646,414 634.5,395.5 C623,377 585,376 585,395.5 C585,415 623,414 634.5,395.5 Z" />
+          <path class="pl-cup" d="M583,428 H686 Q702,428 699.5,444 L689,516 Q687,531 672,531 H597 Q582,531 580,516 L569.5,444 Q567,428 583,428 Z" />
+          <circle class="pl-dot" cx="634.5" cy="365.5" r="12.5" />
+        </svg>
+      </div>
+    </div>
+    <div class="preloader__foot"><span class="pl-line">Warming the oven</span><span class="pl-count"><span class="pl-num">0</span>%</span></div>
+  </div>
+
+  <header class="nav">
+    <a href="#top" class="nav__logo" aria-label="Loop Bite home">
+      <img src="/logo.png" alt="Loop Bite" width="44" height="44" />
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#bakes" data-cursor="Go"><span class="nav__t"><span>Bakes</span><span aria-hidden="true">Bakes</span></span></a>
+      <a href="#occasions" data-cursor="Go"><span class="nav__t"><span>Occasions</span><span aria-hidden="true">Occasions</span></span></a>
+      <a href="#hampers" data-cursor="Go"><span class="nav__t"><span>Hampers</span><span aria-hidden="true">Hampers</span></span></a>
+      <a href="#how" data-cursor="Go"><span class="nav__t"><span>How to order</span><span aria-hidden="true">How to order</span></span></a>
+    </nav>
+    <a href="#order" class="btn btn--gold nav__cta magnetic" data-cursor="Order">Order now <span class="nav__arrow" aria-hidden="true">→</span></a>
+  </header>
+
+  <main id="top">
+
+    <!-- 01 · Hero — one bake at a time, changes on its own -->
+    <section class="hero" data-theme="espresso">
+      <div class="hero__card">
+        <div class="hero__glow" aria-hidden="true"></div>
+
+        <p class="hero__line">Endings that taste<br /><em>like beginnings.</em></p>
+
+        <h1 class="hero__word"><span class="sr-only">Loop Bite: </span><span class="hero__word-in">Brownie!</span></h1>
+
+        <div class="hero__stage" data-cursor="Bite">
+          <div class="hero__crumbs" aria-hidden="true"></div>
+          <div class="hero__float">
+            <img class="hero__product" src="/cutouts/brownie.webp" alt="A fudgy chocolate brownie square" width="1100" height="668" />
+          </div>
+          <span class="hero__tag">Fudgy</span>
+        </div>
+
+        <div class="hero__bar">
+          <div class="hero__progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · Quote interlude -->
+    <section class="quote" data-theme="cocoa">
+      <p class="quote__text">Please eat your favourite dessert. There’s no special occasion. <em>YOU</em> are the occasion.</p>
+      <span class="quote__sign">— loop_bite</span>
+    </section>
+
+    <!-- 03 · Signature bakes (horizontal) -->
+    <section class="bakes" id="bakes" data-theme="cocoa">
+      <div class="bakes__pin">
+        <div class="bakes__intro">
+          <span class="chapter-tag chapter-tag--dark">02 / The signatures</span>
+          <h2 class="bakes__title split-lines">The things people<br />DM us about <em>at midnight.</em></h2>
+          <p class="bakes__note">Scroll to browse →<br /><small>Prices shown are placeholders.</small></p>
+        </div>
+        <div class="bakes__track">
+          <article class="bake bake--tall" data-speed="0.9">
+            <figure class="bake__img"><img src="/images/brownie-box.webp" alt="Box of fudgy brownies with Biscoff and Nutella swirls" loading="lazy" /></figure>
+            <div class="bake__meta"><h3>Brownies</h3><p>Crackle-top, fudgy middle. Classic or loaded.</p><span class="price">from ₹ —</span></div>
+          </article>
+          <article class="bake bake--low" data-speed="1.1">
+            <figure class="bake__img"><img src="/images/cookie-tub.webp" alt="Chunky chocolate chip cookies in a kraft tub" loading="lazy" /></figure>
+            <div class="bake__meta"><h3>Cookies</h3><p>Chunky, gooey in the middle, chocolate everywhere.</p><span class="price">from ₹ —</span></div>
+          </article>
+          <article class="bake bake--wide" data-speed="0.95">
+            <figure class="bake__img"><img src="/images/cake-nuts.webp" alt="Chocolate birthday cake topped with almonds and pistachios" loading="lazy" /></figure>
+            <div class="bake__meta"><h3>Celebration cakes</h3><p>Birthdays, anniversaries, any day worth a candle.</p><span class="price">from ₹ —</span></div>
+          </article>
+          <article class="bake bake--high" data-speed="1.15">
+            <figure class="bake__img"><img src="/images/cupcakes-rose.webp" alt="Chocolate rose cupcakes in a box" loading="lazy" /></figure>
+            <div class="bake__meta"><h3>Cupcakes &amp; muffins</h3><p>Rose-piped or choc-chip, baked in small batches.</p><span class="price">from ₹ —</span></div>
+          </article>
+          <article class="bake bake--tall" data-speed="1">
+            <figure class="bake__img"><img src="/images/kinder-tub.webp" alt="Kinder Nutella dessert tub held in hand" loading="lazy" /><span class="badge">New</span></figure>
+            <div class="bake__meta"><h3>Kinder Nutella Tub</h3><p>The newest obsession. Spoon not optional.</p><span class="price">from ₹ —</span></div>
+          </article>
+          <article class="bake bake--low" data-speed="1.1">
+            <figure class="bake__img"><img src="/images/crackle.webp" alt="Close-up of crackly brownie top" loading="lazy" /><span class="badge">Gluten-free</span></figure>
+            <div class="bake__meta"><h3>Gluten-free brownie</h3><p>No maida. No refined sugar. Still a brownie.</p><span class="price">from ₹ —</span></div>
+          </article>
+          <article class="bake bake--wide" data-speed="0.92">
+            <figure class="bake__img"><img src="/images/name-brownie.webp" alt="Personalised brownie slab with a name piped in chocolate" loading="lazy" /></figure>
+            <div class="bake__meta"><h3>Personalised slabs</h3><p>Their name, piped in chocolate. Very hard to forget.</p><span class="price">from ₹ —</span></div>
+          </article>
+          <div class="bakes__end"><a href="#order" class="btn btn--gold magnetic" data-cursor="Order">Build your order</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · Occasions -->
+    <section class="occasions" id="occasions" data-theme="cocoa">
+      <div class="occasions__head">
+        <span class="chapter-tag chapter-tag--dark">03 / The moments</span>
+        <h2 class="split-lines">Made for<br /><em>the moment.</em></h2>
+        <p>Pick the moment. We’ll fill in the rest of your order.</p>
+      </div>
+      <div class="deck">
+        <button class="occ" data-occasion="Birthday" data-cursor="Plan">
+          <img src="/images/bday-brownie.webp" alt="" loading="lazy" />
+          <span class="occ__n">i.</span><span class="occ__t">Birthday</span><span class="occ__d">Cakes, cookie cakes, name slabs.</span>
+        </button>
+        <button class="occ" data-occasion="Anniversary" data-cursor="Plan">
+          <img src="/images/anniv-quad.webp" alt="" loading="lazy" />
+          <span class="occ__n">ii.</span><span class="occ__t">Anniversary</span><span class="occ__d">Four flavours, one slab, many years.</span>
+        </button>
+        <button class="occ" data-occasion="Mom-to-be" data-cursor="Plan">
+          <img src="/images/momtobe.webp" alt="" loading="lazy" />
+          <span class="occ__n">iii.</span><span class="occ__t">Mom-to-be</span><span class="occ__d">Sweet boxes for the baby shower.</span>
+        </button>
+        <button class="occ" data-occasion="New job" data-cursor="Plan">
+          <img src="/images/note-tub.webp" alt="" loading="lazy" />
+          <span class="occ__n">iv.</span><span class="occ__t">New job</span><span class="occ__d">A tub and a note that says “so proud”.</span>
+        </button>
+        <button class="occ" data-occasion="Just because" data-cursor="Plan">
+          <img src="/images/cookie-flowers.webp" alt="" loading="lazy" />
+          <span class="occ__n">v.</span><span class="occ__t">Just because</span><span class="occ__d">No reason needed. You are the occasion.</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 06 · Hampers (box opens) -->
+    <section class="hamper" id="hampers" data-theme="espresso">
+      <div class="hamper__pin">
+        <div class="hamper__copy">
+          <span class="chapter-tag">04 / The hamper</span>
+          <h2 class="split-lines">Untie the twine.<br /><em>Lift the lid.</em></h2>
+          <p>Gift hampers curated with brownies, cookies, tubs and a handwritten note. For birthdays, festivals, and anyone who deserves a box of good things.</p>
+          <div class="hamper__corp">
+            <b>Office celebrations &amp; corporate gifting</b>
+            <span>Bulk boxes for Diwali, Women’s Day, team wins and farewells.</span>
+            <a href="#order" class="link-arrow" data-cursor="Ask" data-occasion-link="Corporate / bulk">Ask for a quote →</a>
+          </div>
+        </div>
+        <div class="box-stage">
+          <div class="box">
+            <div class="box__items">
+              <img class="box__item" src="/images/brownie-tub.webp" alt="" />
+              <img class="box__item" src="/images/cookie-tub.webp" alt="" />
+              <img class="box__item" src="/images/redvelvet.webp" alt="" />
+              <img class="box__item" src="/images/cupcakes-rose.webp" alt="" />
+              <div class="box__item box__note">Have a<br />lovely day ♡</div>
+            </div>
+            <div class="box__base">
+              <span class="box__sticker"><img src="/logo.png" alt="" /></span>
+            </div>
+            <div class="box__lid"></div>
+            <span class="box__twine box__twine--v"></span>
+            <span class="box__twine box__twine--h"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · Happy Notes -->
+    <section class="notes" data-theme="espresso">
+      <div class="notes__head">
+        <span class="chapter-tag chapter-tag--dark">05 / Happy notes</span>
+        <h2 class="split-lines">The nicest messages<br /><em>end up here.</em></h2>
+        <p class="notes__hint">Drag them around.<br /><small>Sample notes — real ones from the “Happy Notes” highlight go here.</small></p>
+      </div>
+      <div class="notes__board">
+        <article class="note" data-depth="0.6"><p>“The brownies didn’t survive the drive home.”</p><span>— a happy customer</span></article>
+        <article class="note note--kraft" data-depth="1.1"><p>“Ordered for my mom’s birthday. She hid the last piece from all of us.”</p><span>— birthday order</span></article>
+        <article class="note" data-depth="0.8"><p>“That gluten-free brownie tastes like it’s cheating.”</p><span>— repeat order</span></article>
+        <article class="note note--cocoa" data-depth="1.3"><p>“The packaging alone made my friend cry.”</p><span>— gift hamper</span></article>
+        <article class="note" data-depth="0.7"><p>“Cookie cake &gt; birthday cake. Fight me.”</p><span>— cookie cake</span></article>
+      </div>
+    </section>
+
+    <!-- 08 · How to order — one screen, the loop line runs once across four steps -->
+    <section class="how" id="how" data-theme="cocoa">
+      <div class="how__head">
+        <span class="chapter-tag">06 / The loop</span>
+        <h2 class="split-lines">How an order<br /><em>comes full circle.</em></h2>
+        <p>Four steps, about three days, one very happy someone.</p>
+      </div>
+      <div class="how__track">
+        <svg class="how__line" aria-hidden="true"><path class="how__ghost" /><path class="how__draw" /></svg>
+        <span class="how__dot" aria-hidden="true"></span>
+        <ol class="how__steps">
+          <li class="how__step"><span class="how__node">1</span><h3>Pick your bake</h3><p>Brownies, cookies, cupcakes, cakes, tubs or a whole hamper.</p></li>
+          <li class="how__step"><span class="how__node">2</span><h3>Choose a date</h3><p>Give us at least 3 days. Everything is baked fresh for you.</p></li>
+          <li class="how__step"><span class="how__node">3</span><h3>Confirm on chat</h3><p>Send it on WhatsApp or DM @loop_bite. We confirm the price.</p></li>
+          <li class="how__step"><span class="how__node">4</span><h3>Pickup or delivery</h3><p>Collect in Sholinganallur or get it delivered, note inside.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 09 · Order form -->
+    <section class="order" id="order" data-theme="cocoa">
+      <div class="order__copy">
+        <span class="chapter-tag chapter-tag--dark">07 / Your turn</span>
+        <h2 class="split-lines">Let’s bake something<br /><em>for your someone.</em></h2>
+        <p>Fill this in and it opens WhatsApp with your order already written. We’ll reply with the price and confirm.</p>
+        <a class="link-arrow" href="https://ig.me/m/loop_bite" target="_blank" rel="noopener" data-cursor="DM">Prefer Instagram? DM @loop_bite →</a>
+        <figure class="note-preview" aria-live="polite">
+          <figcaption class="note-preview__label">Your note, as it'll look</figcaption>
+          <p class="note-preview__msg is-empty">Your words go here ♡</p>
+          <p class="note-preview__for"></p>
+          <p class="note-preview__date"></p>
+        </figure>
+      </div>
+      <form class="order__form" novalidate>
+        <label class="field"><span>Your name</span><input name="name" required autocomplete="name" placeholder="Priya" /></label>
+        <label class="field"><span>What are we baking?</span>
+          <select name="product" required>
+            <option value="">Choose a bake</option>
+            <option>Brownies</option><option>Cookies</option><option>Cupcakes / Muffins</option>
+            <option>Celebration cake</option><option>Kinder Nutella Tub</option><option>Gluten-free brownie</option>
+            <option>Personalised slab</option><option>Gift hamper</option>
+          </select>
+        </label>
+        <label class="field"><span>Occasion</span>
+          <select name="occasion">
+            <option value="">Pick an occasion</option>
+            <option>Birthday</option><option>Anniversary</option><option>Mom-to-be</option><option>New job</option>
+            <option>Just because</option><option>Corporate / bulk</option>
+          </select>
+        </label>
+        <label class="field"><span>Needed on</span><input type="date" name="date" required /><em class="field__hint">At least 3 days from today</em></label>
+        <label class="field field--wide"><span>Message on the bake / note</span><input name="message" maxlength="60" placeholder="Happy birthday Amma ♡" /></label>
+        <label class="field field--wide"><span>Anything else?</span><textarea name="notes" rows="2" placeholder="Eggless? Quantity? Delivery area?"></textarea></label>
+        <p class="order__error" role="alert" hidden></p>
+        <button type="submit" class="btn btn--gold btn--big magnetic" data-cursor="Send">Send order on WhatsApp</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- 10 · Footer -->
+  <footer class="footer" data-theme="espresso">
+    <div class="footer__cta">
+      <svg class="footer__loop" viewBox="0 0 120 60" aria-hidden="true">
+        <path d="M60,30 C70,15 100,12 100,30 C100,48 70,45 60,30 C50,15 20,12 20,30 C20,48 50,45 60,30 Z" />
+        <circle class="footer__dot" cx="60" cy="30" r="2.4" />
+      </svg>
+      <p class="footer__line">Every ending is a new beginning.</p>
+      <h2 class="footer__ask">Craving <em>something?</em></h2>
+      <div class="footer__actions">
+        <a href="#order" class="btn btn--gold btn--big magnetic" data-cursor="Order">Start an order <span aria-hidden="true">→</span></a>
+        <a href="https://ig.me/m/loop_bite" target="_blank" rel="noopener" class="btn btn--line btn--big magnetic" data-cursor="DM">DM @loop_bite</a>
+      </div>
+    </div>
+
+    <div class="footer__mark" role="img" aria-label="Loop Bite">
+      <span class="footer__word" aria-hidden="true">Loop</span>
+      <span class="footer__word footer__word--bite" aria-hidden="true">Bite</span>
+      <svg class="footer__icon" viewBox="0 -40 120 150" overflow="visible" aria-hidden="true">
+        <use href="#inf-path" class="fi-inf" /><use href="#cup-path" class="fi-cup" /><circle class="fi-dot" cx="60" cy="12" r="6.5" />
+      </svg>
+    </div>
+
+    <div class="footer__grid">
+      <div><h4>Visit</h4><p>Home bakery<br />Sholinganallur, Chennai</p></div>
+      <div><h4>Order</h4><p>3 days ahead<br />WhatsApp or Instagram DM</p></div>
+      <div><h4>Follow</h4><p><a href="https://www.instagram.com/loop_bite/" target="_blank" rel="noopener" data-cursor="Follow">Instagram @loop_bite</a></p></div>
+      <div class="footer__top"><button type="button" class="footer__totop" data-cursor="Top">Back to top <span aria-hidden="true">↑</span></button></div>
+    </div>
+    <div class="footer__base"><span>© <span class="footer__year">2026</span> Loop Bite. Baked with love in Chennai.</span><span>See you at the next bite.</span></div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
