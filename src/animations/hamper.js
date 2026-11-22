@@ -29,7 +29,8 @@ export function hamperScroll() {
       .to('.box__lid', { y: () => -size() * 0.5, rotate: -5, duration: 0.6, ease: 'power3.out' }, 1.0)
       // the lid goes down beside the box, behind the treats, so nothing (like the note) is hidden
       .set('.box__lid', { zIndex: 1 }, 1.55)
-      .to('.box__lid', { y: () => size() * 0.2, x: () => size() * 0.62, rotate: 14, duration: 0.7, ease: 'power2.inOut' }, 1.55);
+      // stays inside the screen: rests just right of the box on desktop, tucked lower on phones
+      .to('.box__lid', { y: () => size() * (desktop ? 0.2 : 0.3), x: () => size() * (desktop ? 0.34 : 0.16), rotate: desktop ? 10 : 6, autoAlpha: desktop ? 1 : 0, duration: 0.7, ease: 'power2.inOut' }, 1.55);
 
     items.forEach((it, i) => {
       const p = spots[i % spots.length];

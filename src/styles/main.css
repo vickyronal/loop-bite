@@ -44,6 +44,9 @@ h2 { font-size: clamp(2.4rem, 5.2vw, 5.4rem); }
 h2 em, h1 em { font-style: italic; font-weight: 500; color: var(--gold); font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 144; }
 p { margin: 0; text-wrap: pretty; }
 ::selection { background: var(--gold); color: var(--espresso); }
+/* keyboard users can always see where they are */
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+.btn:focus-visible { border-radius: 99px; }
 
 /* Sections paint their own colour without JS; with JS the body colour tweens between them */
 [data-theme="cocoa"] { background: var(--cocoa); color: var(--cream); }
@@ -196,27 +199,24 @@ section { position: relative; z-index: 1; }
   box-shadow: 0 10px 24px -8px rgba(20, 8, 4, .6);
 }
 
-.hero__bar {
-  position: absolute; z-index: 5; left: 0; right: 0; bottom: calc(var(--s) / 2 + 1.6rem); padding: 0 clamp(1.4rem, 3vw, 3rem);
-  display: flex; justify-content: center;
-}
+/* progress line: centred at the bottom on every screen */
+.hero__progress { position: absolute; z-index: 5; left: 0; right: 0; bottom: calc(var(--s) / 2 + 1.35rem); display: flex; justify-content: center; gap: 6px; }
+.hero__progress i { position: relative; width: 30px; height: 3px; border-radius: 3px; overflow: hidden; background: rgba(243,227,195,.18); }
+.hero__progress i::after { content: ""; position: absolute; inset: 0; background: var(--cream); transform-origin: left; transform: scaleX(var(--p, 0)); }
 .hero__line {
   position: absolute; z-index: 5; right: clamp(1.4rem, 3vw, 3rem); bottom: calc(var(--s) / 2 + 1.1rem); text-align: right;
   font-family: var(--serif); font-weight: 500; font-size: clamp(1.15rem, 1.5vw, 1.5rem); line-height: 1.12; letter-spacing: -.01em;
 }
 .hero__line em { color: var(--gold); }
-.hero__progress { display: flex; gap: 6px; }
-.hero__progress i { position: relative; width: 30px; height: 3px; border-radius: 3px; overflow: hidden; background: rgba(243,227,195,.18); }
-.hero__progress i::after { content: ""; position: absolute; inset: 0; background: var(--cream); transform-origin: left; transform: scaleX(var(--p, 0)); }
 
 @media (max-width: 860px) {
   .hero__card { --s: 44px; min-height: 660px; }
   .hero__word { top: 34%; }
   .hero__stage { --w: 72vw; top: 53%; }
   .hero__tag { left: -2%; top: 2%; }
-  .hero__bar { bottom: calc(var(--s) / 2 + 1.2rem); }
-  .hero__line { right: 0; left: 0; text-align: center; bottom: calc(var(--s) / 2 + 2.6rem); font-size: 1.1rem; }
-    }
+  .hero__line { right: 0; left: 0; text-align: center; bottom: calc(var(--s) / 2 + 2.8rem); font-size: 1.1rem; }
+  .hero__progress { bottom: calc(var(--s) / 2 + 1.1rem); }
+}
 
 
 /* ───────── 03 Bakes ───────── */
@@ -287,7 +287,7 @@ section { position: relative; z-index: 1; }
 
 /* ───────── 06 Hamper ───────── */
 .hamper__pin { position: relative; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: center; gap: 4vw; padding: 8rem var(--gutter) 4rem; }
-.hamper__copy { display: grid; gap: 1.4rem; max-width: 32rem; }
+.hamper__copy { display: grid; gap: 1.4rem; max-width: 38rem; }
 .hamper__copy .chapter-tag { position: static; }
 .hamper__copy p { opacity: .8; }
 .hamper__corp { display: grid; gap: .35rem; padding: 1.2rem 1.4rem; border: 1px solid rgba(243,227,195,.2); border-radius: 10px; margin-top: .5rem; }
@@ -322,7 +322,7 @@ section { position: relative; z-index: 1; }
 }
 .box__note { display: grid; place-items: center; text-align: center; background: var(--cream-2); color: var(--cocoa); font-family: var(--hand); font-size: clamp(1.3rem, 2vw, 1.8rem); line-height: 1.1; aspect-ratio: 1; width: 30%; margin-left: -15%; }
 @media (max-width: 860px) {
-  .hamper__pin { grid-template-columns: 1fr; padding-top: 7rem; }
+  .hamper__pin { grid-template-columns: 1fr; min-height: 0; padding-top: 5rem; }
   .box-stage { height: 70vh; }
 }
 .no-motion .box__item { display: none; }
@@ -485,3 +485,6 @@ section { position: relative; z-index: 1; }
 .note-preview__for { font-family: var(--hand); font-weight: 700; font-size: 1.35rem; color: #b07a2a; margin-top: .3rem; min-height: 1.2em; }
 .note-preview__date { font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; opacity: .5; margin-top: .6rem; }
 .bite-dust { filter: blur(4px); }
+
+/* notes can only be dragged with a mouse, so don't promise it on touch screens */
+@media (hover: none), (pointer: coarse) { .drag-hint { display: none; } }

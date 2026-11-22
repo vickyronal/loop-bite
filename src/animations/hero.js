@@ -12,8 +12,10 @@ export const PRODUCTS = [
   { word: 'Cake!', name: 'Celebration cakes', img: '/cutouts/cake.webp', tag: 'Made for you', option: 'Celebration cake', alt: 'A slice of caramel and chocolate layer cake' },
   { word: 'Tub!', name: 'Dessert tubs', img: '/cutouts/tub.webp', tag: 'New', option: 'Kinder Nutella Tub', alt: 'A layered chocolate dessert cup' },
 ];
-const HOLD = 5.4; // seconds each bake stays on screen
-const BITES = 3; // bites before it's "finished"
+const BITES = 2; // two bites finish a bake, then the next one comes in
+const HOLD = 5; // mobile only: seconds each bake stays before moving on by itself
+// touch screens (phones, tablets) have no hover, so the bakes move along on a timer there
+const isTouch = () => matchMedia('(hover: none), (pointer: coarse)').matches;
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -23,7 +25,6 @@ let els;
 let crumbs = [];
 let idx = 0;
 let reduced = false;
-let timer = null;
 
 /* ---------- headline: one word, fitted to the card ---------- */
 function setWord(text) {
@@ -65,14 +66,6 @@ function placeCrumbs() {
   crumbs.forEach((c) => { const b = crumbBase(c); gsap.set(c.el, { x: b.x, y: b.y, xPercent: -50, yPercent: -50, rotation: c.rot }); });
 }
 
-/* ---------- the slim progress line ---------- */
-const bars = () => $$('.hero__progress i');
-function runProgress() {
-  timer?.kill();
-  bars().forEach((b, j) => gsap.set(b, { '--p': j < idx ? 1 : 0 }));
-  timer = gsap.fromTo(bars()[idx], { '--p': 0 }, { '--p': 1, duration: HOLD, ease: 'none', onComplete: next });
-}
-
 /* ---------- change bake ---------- */
 function show(i) {
   const p = PRODUCTS[i];
@@ -108,6 +101,20 @@ function next() {
   }
   show(idx);
   runProgress();
+}
+
+/* ---------- the slim progress line ----------
+ * touch screens: it fills over HOLD seconds, then the next bake comes in by itself.
+ * mouse screens: no timer — it simply shows which bake you're on; two hover bites move it along. */
+let timer = null;
+const bars = () => [...document.querySelectorAll('.hero__progress i')];
+function runProgress() {
+  timer?.kill();
+  bars().forEach((b, j) => gsap.set(b, { '--p': j < idx ? 1 : 0 }));
+  const cur = bars()[idx];
+  if (!cur) return;
+  if (reduced || !isTouch()) { gsap.to(cur, { '--p': 1, duration: 0.6, ease: 'power2.out' }); return; }
+  timer = gsap.fromTo(cur, { '--p': 0 }, { '--p': 1, duration: HOLD, ease: 'none', onComplete: next });
 }
 
 /* ---------- bites: only when you hover over the bake ---------- */
@@ -216,7 +223,7 @@ function contentBox() {
 /** Hover bite: towards wherever the pointer is on the bake. */
 function hoverBite(e) {
   const now = performance.now();
-  if (biteCount >= BITES || now - lastHoverBite < 700) return;
+  if (biteCount >= BITES || now - lastHoverBite < 650) return;
   lastHoverBite = now;
   const r0 = els.float.getBoundingClientRect();
   const box = contentBox();
@@ -254,9 +261,9 @@ function biteAt(lx, ly, nx, ny, box) {
     burstCrumbs(cx, cy, nx, ny, box, r);
   }
   // finished it? move on a little early
-  if (biteCount >= BITES && !reduced) {
+  if (biteCount >= BITES) {
     timer?.kill();
-    timer = gsap.to(bars()[idx], { '--p': 1, duration: 1.2, ease: 'power1.in', onComplete: next });
+    gsap.delayedCall(reduced ? 0.3 : 0.9, next); // let the crumbs fall, then bring in the next bake
   }
 }
 
@@ -269,6 +276,8 @@ export function initHero({ scrollToEl, reduced: r = false }) {
     float: $('.hero__float'),
   };
   els.product.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hoverBite(e); });
+  // phones have no hover: a tap takes the bite
+  els.product.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') hoverBite(e); });
   els.product.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') hoverBite(e); });
   PRODUCTS.forEach((p) => { const im = new Image(); im.src = p.img; }); // preload
   setWord(PRODUCTS[0].word);
@@ -303,25 +312,23 @@ export function heroIntro() {
     .from('.hero__tag', { scale: 0, rotation: -30, duration: 0.9, ease: 'back.out(2)' }, 1.1)
     .from('.hero__line', { y: 20, autoAlpha: 0, duration: 1 }, 1.1)
     .from('.nav__logo, .nav__links, .nav__cta', { y: -18, autoAlpha: 0, duration: 0.9, stagger: 0.08 }, 0.7)
-    .from('.hero__bar > *', { y: 24, autoAlpha: 0, duration: 1, stagger: 0.1 }, 1.1);
+
   crumbs.forEach((c, i) => {
     const b = crumbBase(c);
     tl.fromTo(c.el, { x: 0, y: 0, scale: 0 }, { x: b.x, y: b.y, scale: 1, duration: 1.3 }, 1 + i * 0.04);
   });
-  tl.add(runProgress, 1.4);
+  tl.from('.hero__progress', { y: 16, autoAlpha: 0, duration: 1 }, 1.2).add(runProgress, 1.4);
 }
 
-/** Scrolling out: product sinks and grows, the word lifts; auto-advance pauses off-screen. */
+/** Scrolling out: product sinks and grows, the word lifts. */
 export function heroScroll() {
-  ScrollTrigger.create({
-    trigger: '.hero', start: 'top top', end: 'bottom top',
-    onLeave: () => timer?.pause(), onEnterBack: () => timer?.resume(),
-  });
+  // mobile timer pauses while the hero is off screen
+  ScrollTrigger.create({ trigger: '.hero', start: 'top top', end: 'bottom top', onLeave: () => timer?.pause(), onEnterBack: () => timer?.resume() });
   gsap.timeline({
     defaults: { ease: 'none' },
     scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
   })
     .to('.hero__stage', { yPercent: 16, scale: 1.1 }, 0)
     .to(els.word, { yPercent: -30, autoAlpha: 0.25 }, 0)
-    .to('.hero__bar, .hero__line', { autoAlpha: 0, y: 24 }, 0);
+    .to('.hero__line', { autoAlpha: 0, y: 24 }, 0);
 }
