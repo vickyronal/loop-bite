@@ -25,14 +25,18 @@ export function runPreloader(fontsReady) {
 
   return new Promise((resolve) => {
     const intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
+    // the icon is born big in the centre of the screen, then glides to its place beside "Bite"
+    gsap.set(q('.pl-mark'), { x: -207, y: -105.5, scale: 1.7, svgOrigin: '634.5 442' });
     intro
-      .to(q('.pl-dot'), { y: 0, opacity: 1, duration: 0.9, ease: 'bounce.out' }, 0.1)
-      .to(inf, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut' }, 0.75)
-      .to(q('.pl-cup'), { scaleY: 1, duration: 0.8, ease: 'back.out(2)' }, 1.15)
-      .to(q('.pl-dot'), { scale: 1.35, transformOrigin: '50% 50%', duration: 0.25, yoyo: true, repeat: 1, ease: 'power2.out' }, 1.5)
-      .to(q('.pl-clip--loop .pl-in'), { yPercent: 0, duration: 1.1 }, 1.2)
-      .to(q('.pl-clip--bite .pl-in'), { yPercent: 0, duration: 1.1 }, 1.32)
-      .to(counter, { v: 100, duration: 2.6, ease: 'power1.inOut', onUpdate: () => (num.textContent = Math.round(counter.v)) }, 0);
+      .to(q('.pl-dot'), { y: 0, opacity: 1, duration: 0.9, ease: 'bounce.out' }, 0.15)
+      .to(inf, { strokeDashoffset: 0, duration: 1.0, ease: 'power2.inOut' }, 0.8)
+      .to(q('.pl-cup'), { scaleY: 1, duration: 0.8, ease: 'back.out(2)' }, 1.2)
+      .to(q('.pl-dot'), { scale: 1.35, transformOrigin: '50% 50%', duration: 0.25, yoyo: true, repeat: 1, ease: 'power2.out' }, 1.55)
+      // home: the mark settles into the logo while the words rise in around it
+      .to(q('.pl-mark'), { x: 0, y: 0, scale: 1, duration: 1.15, ease: 'expo.inOut' }, 1.95)
+      .to(q('.pl-clip--loop .pl-in'), { yPercent: 0, duration: 1.1 }, 2.3)
+      .to(q('.pl-clip--bite .pl-in'), { yPercent: 0, duration: 1.1 }, 2.42)
+      .to(counter, { v: 100, duration: 3.4, ease: 'power1.inOut', onUpdate: () => (num.textContent = Math.round(counter.v)) }, 0);
 
     Promise.all([fontsReady, new Promise((r) => intro.eventCallback('onComplete', r))]).then(() => {
       // fly the logo into the nav logo's spot (FLIP)

@@ -14,3 +14,7 @@ for (let p = 0, q = 0; p < data.length; p += 3, q += 4) {
 }
 await sharp(out, { raw: { width: info.width, height: info.height, channels: 4 } }).png().toFile('public/logo-mark.png');
 console.log('bg', bg, '→ public/logo-mark.png', info.width, info.height);
+
+// tight crop of the artwork (same box the intro uses) for the nav
+await sharp('public/logo-mark.png').extract({ left: 140, top: 128, width: 575, height: 417 }).png().toFile('public/logo-nav.png');
+console.log('→ public/logo-nav.png 575x417');
