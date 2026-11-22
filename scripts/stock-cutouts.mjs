@@ -1,4 +1,6 @@
 // Hero cut-outs from free Unsplash photos (Unsplash License) — placeholders until Deepa's own shoot.
+// Needs the background-removal tool, which is NOT a project dependency (it breaks cloud installs).
+// Install it locally only when you need it: npm i --no-save @imgly/background-removal-node
 // Usage: node scripts/stock-cutouts.mjs <dir-with-downloaded-jpgs>
 // Sources (photo pages):
 //   brownie  https://unsplash.com/photos/a-stack-of-brownies-sitting-on-top-of-a-table-s4tMJAcixLY

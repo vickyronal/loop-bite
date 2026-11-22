@@ -1,4 +1,6 @@
 // Removes photo backgrounds locally (no upload) to make hero cut-outs for the pitch.
+// Needs the background-removal tool, which is NOT a project dependency (it breaks cloud installs).
+// Install it locally only when you need it: npm i --no-save @imgly/background-removal-node
 // Usage: node scripts/cutout.mjs name1 name2 ...   (names from public/images, without .webp)
 import { removeBackground } from '@imgly/background-removal-node';
 import sharp from 'sharp';
